@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.BaiTapLon_andori"
+        parent="Theme.Material3.DayNight.NoActionBar">
+
+    </style>
+
+    <style name="Theme.BaiTapLon_andori"
+        parent="Base.Theme.BaiTapLon_andori" />
+
+</resources>
