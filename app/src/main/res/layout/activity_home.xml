@@ -5,34 +5,74 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="20dp">
+    android:padding="20dp"
+    >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TOEIC Learning App"
+        android:text="Quản trị TOEIC Learning App"
         android:textSize="28sp"
         android:textStyle="bold"
         android:layout_marginBottom="30dp"/>
-
     <Button
-        android:id="@+id/btnVocabulary"
+        android:id="@+id/btnChuDe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Học từ vựng"/>
+        android:text="Quản lý chủ đề"
+        android:layout_marginTop="15dp"
+        />
+
 
     <Button
-        android:id="@+id/btnTest"
+        android:id="@+id/btnTuVung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Làm bài test"
+        android:text="Quản lý từ vựng"
+        android:layout_marginTop="15dp"
+        />
+
+    <Button
+        android:id="@+id/btnCauHoi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quản lý câu hỏi"
+        android:layout_marginTop="15dp"/>
+    <Button
+        android:id="@+id/btnChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chat Box"
         android:layout_marginTop="15dp"/>
 
     <Button
-        android:id="@+id/btnResult"
+        style="@style/Widget.MaterialComponents.Button"
+        android:id="@+id/btlTuVungver1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Xem kết quả"
-        android:layout_marginTop="15dp"/>
+        android:text="Qly Tu Vung (ver1)"
+        android:layout_marginTop="15dp"
+        />
+    <Button
+        style="@style/Widget.MaterialComponents.Button"
+        android:id="@+id/btlDangXuat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng xuất"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_doimau"
+        />
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/btlDangXuat"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Đăng xuất"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textSize="18sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:background="@drawable/button_doimau"-->
+<!--        />-->
+
 
 </LinearLayout>

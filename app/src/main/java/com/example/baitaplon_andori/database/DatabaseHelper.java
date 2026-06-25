@@ -6,7 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "ToeicDB.db";
+    // Tiếp tục đổi tên Database mới để xóa hoàn toàn các bảng cũ bị lệch cấu trúc
+    private static final String DATABASE_NAME = "ToeicDB_No_ForeignKeys1.db";
     private static final int DATABASE_VERSION = 1;
 
     public DatabaseHelper(Context context) {
@@ -14,186 +15,116 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+
+    @Override
     public void onCreate(SQLiteDatabase db) {
 
-        // 1. Users
+        // 1. Bảng Chủ Đề
         db.execSQL(
-                "CREATE TABLE Users (" +
-                        "UserID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "Username TEXT NOT NULL UNIQUE," +
-                        "Password TEXT NOT NULL," +
-                        "FullName TEXT" +
-                        ")"
+                "CREATE TABLE ChuDe (" +
+                        "MaChuDe INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "TenChuDe TEXT NOT NULL)"
         );
 
-        // 2. Topics
+        // 2. Bảng Từ Vựng
         db.execSQL(
-                "CREATE TABLE Topics (" +
-                        "TopicID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "TopicName TEXT NOT NULL" +
-                        ")"
+                "CREATE TABLE TuVung (" +
+                        "MaTu INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "TuTiengAnh TEXT NOT NULL," +
+                        "NghiaTiengViet TEXT NOT NULL," +
+                        "HinhAnh TEXT," +
+                        "MaChuDe INTEGER," +
+                        "FOREIGN KEY(MaChuDe) REFERENCES ChuDe(MaChuDe) ON DELETE CASCADE)"
         );
 
-        // 3. Vocabulary
+        // 3. Bảng Thẻ Ghi Nhớ
         db.execSQL(
-                "CREATE TABLE Vocabulary (" +
-                        "VocabID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "Word TEXT NOT NULL," +
-                        "Meaning TEXT NOT NULL," +
-                        "Pronunciation TEXT," +
-                        "Example TEXT," +
-                        "TopicID INTEGER," +
-                        "FOREIGN KEY(TopicID) REFERENCES Topics(TopicID)" +
-                        ")"
+                "CREATE TABLE TheGhiNho (" +
+                        "MaThe INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "MaTu INTEGER," +
+                        "DaNho INTEGER DEFAULT 0," +
+                        "FOREIGN KEY(MaTu) REFERENCES TuVung(MaTu) ON DELETE CASCADE)"
         );
 
-        // 4. Flashcards
+        // 4. Bảng Bài Test
         db.execSQL(
-                "CREATE TABLE Flashcards (" +
-                        "FlashcardID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "UserID INTEGER," +
-                        "VocabID INTEGER," +
-                        "IsRemembered INTEGER DEFAULT 0," +
-                        "FOREIGN KEY(UserID) REFERENCES Users(UserID)," +
-                        "FOREIGN KEY(VocabID) REFERENCES Vocabulary(VocabID)" +
-                        ")"
+                "CREATE TABLE BaiTest (" +
+                        "MaBaiTest INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "TenBaiTest TEXT NOT NULL," +
+                        "TongSoCau INTEGER)"
         );
 
-        // 5. Questions
+        // 5. Bảng Câu Hỏi (ĐÃ SỬA: Bỏ hoàn toàn MaChuDe, MaBaiTest và các khóa ngoại liên quan)
         db.execSQL(
-                "CREATE TABLE Questions (" +
-                        "QuestionID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "TopicID INTEGER," +
-                        "QuestionText TEXT NOT NULL," +
-                        "OptionA TEXT," +
-                        "OptionB TEXT," +
-                        "OptionC TEXT," +
-                        "OptionD TEXT," +
-                        "CorrectAnswer TEXT," +
-                        "Explanation TEXT," +
-                        "FOREIGN KEY(TopicID) REFERENCES Topics(TopicID)" +
-                        ")"
+                "CREATE TABLE CauHoi (" +
+                        "MaCauHoi INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "NoiDung TEXT NOT NULL," +
+                        "DapAnA TEXT," +
+                        "DapAnB TEXT," +
+                        "DapAnC TEXT," +
+                        "DapAnD TEXT," +
+                        "DapAnDung TEXT," +
+                        "GiaiThich TEXT)"
         );
 
-        // 6. Tests
-        db.execSQL(
-                "CREATE TABLE Tests (" +
-                        "TestID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "TestName TEXT NOT NULL," +
-                        "TotalQuestions INTEGER" +
-                        ")"
-        );
-
-        // 7. TestDetails
-        db.execSQL(
-                "CREATE TABLE TestDetails (" +
-                        "TestID INTEGER," +
-                        "QuestionID INTEGER," +
-                        "PRIMARY KEY(TestID, QuestionID)," +
-                        "FOREIGN KEY(TestID) REFERENCES Tests(TestID)," +
-                        "FOREIGN KEY(QuestionID) REFERENCES Questions(QuestionID)" +
-                        ")"
-        );
-
-        // 8. Results
-        db.execSQL(
-                "CREATE TABLE Results (" +
-                        "ResultID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "UserID INTEGER," +
-                        "TestID INTEGER," +
-                        "Score INTEGER," +
-                        "TestDate DATETIME DEFAULT CURRENT_TIMESTAMP," +
-                        "FOREIGN KEY(UserID) REFERENCES Users(UserID)," +
-                        "FOREIGN KEY(TestID) REFERENCES Tests(TestID)" +
-                        ")"
-        );
-
-        // 9. AnswerHistory
-        db.execSQL(
-                "CREATE TABLE AnswerHistory (" +
-                        "HistoryID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        "UserID INTEGER," +
-                        "QuestionID INTEGER," +
-                        "SelectedAnswer TEXT," +
-                        "IsCorrect INTEGER," +
-                        "AnswerDate DATETIME DEFAULT CURRENT_TIMESTAMP," +
-                        "FOREIGN KEY(UserID) REFERENCES Users(UserID)," +
-                        "FOREIGN KEY(QuestionID) REFERENCES Questions(QuestionID)" +
-                        ")"
-        );
-
+        // Chèn dữ liệu mẫu
         insertSampleData(db);
     }
 
     private void insertSampleData(SQLiteDatabase db) {
 
-        // Chủ đề
-        db.execSQL("INSERT INTO Topics(TopicName) VALUES('Business')");
-        db.execSQL("INSERT INTO Topics(TopicName) VALUES('Office')");
-        db.execSQL("INSERT INTO Topics(TopicName) VALUES('Travel')");
-        db.execSQL("INSERT INTO Topics(TopicName) VALUES('Marketing')");
+        // 1. Dữ liệu mẫu Chủ Đề
+        String sqlChuDe = "INSERT INTO ChuDe(TenChuDe) VALUES (?)";
+        db.execSQL(sqlChuDe, new Object[]{"Kinh doanh"});
+        db.execSQL(sqlChuDe, new Object[]{"Du lịch"});
+        db.execSQL(sqlChuDe, new Object[]{"Văn phòng"});
 
-        // Tài khoản mẫu
-        db.execSQL(
-                "INSERT INTO Users(Username,Password,FullName) " +
-                        "VALUES('admin','123456','Administrator')"
-        );
 
-        // Từ vựng mẫu
-        db.execSQL(
-                "INSERT INTO Vocabulary(Word,Meaning,Pronunciation,Example,TopicID) " +
-                        "VALUES('employee','nhân viên','/ɪmˈplɔɪiː/','He is an employee.',1)"
-        );
+        // 3. Dữ liệu mẫu Thẻ Ghi Nhớ
 
-        db.execSQL(
-                "INSERT INTO Vocabulary(Word,Meaning,Pronunciation,Example,TopicID) " +
-                        "VALUES('salary','tiền lương','/ˈsæləri/','The salary is high.',1)"
-        );
+        // 4. Dữ liệu mẫu Bài Test
+        String sqlBaiTest = "INSERT INTO BaiTest(TenBaiTest, TongSoCau) VALUES(?, ?)";
+        db.execSQL(sqlBaiTest, new Object[]{"Mini Test 1", 2});
+        db.execSQL(sqlBaiTest, new Object[]{"Mini Test 2", 2});
+        db.execSQL(sqlBaiTest, new Object[]{"Grammar Test", 3});
 
-        // Câu hỏi mẫu
-        db.execSQL(
-                "INSERT INTO Questions(" +
-                        "TopicID,QuestionText,OptionA,OptionB,OptionC,OptionD,CorrectAnswer,Explanation)" +
-                        "VALUES(" +
-                        "1," +
-                        "'The manager _____ the report yesterday.'," +
-                        "'submit'," +
-                        "'submitted'," +
-                        "'submitting'," +
-                        "'submits'," +
-                        "'B'," +
-                        "'Yesterday => Past Simple nên dùng submitted.'" +
-                        ")"
-        );
+        // 5. Dữ liệu mẫu Câu Hỏi (ĐÃ SỬA: Chỉ chèn đúng 8 trường dữ liệu, bỏ hoàn toàn các mã liên kết ở cuối)
+        String sqlCauHoi = "INSERT INTO CauHoi(NoiDung, DapAnA, DapAnB, DapAnC, DapAnD, DapAnDung, GiaiThich) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?)";
 
-        // Test mẫu
-        db.execSQL(
-                "INSERT INTO Tests(TestName,TotalQuestions) " +
-                        "VALUES('Mini Test 1',10)"
-        );
+        db.execSQL(sqlCauHoi, new Object[]{
+                "The manager _____ the report yesterday.",
+                "submit", "submitted", "submitting", "submits",
+                "B",
+                "Yesterday là dấu hiệu thì quá khứ đơn."
+        });
 
-        // Ghép câu hỏi vào bài test
-        db.execSQL(
-                "INSERT INTO TestDetails(TestID,QuestionID) " +
-                        "VALUES(1,1)"
-        );
+        db.execSQL(sqlCauHoi, new Object[]{
+                "We received our travel _____ yesterday.",
+                "employee", "salary", "itinerary", "document",
+                "C",
+                "Itinerary nghĩa là lịch trình."
+        });
+
+        db.execSQL(sqlCauHoi, new Object[]{
+                "Please review this _____ carefully.",
+                "campaign", "document", "travel", "employee",
+                "B",
+                "Document nghĩa là tài liệu."
+        });
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db,
-                          int oldVersion,
-                          int newVersion) {
-
-        db.execSQL("DROP TABLE IF EXISTS AnswerHistory");
-        db.execSQL("DROP TABLE IF EXISTS Results");
-        db.execSQL("DROP TABLE IF EXISTS TestDetails");
-        db.execSQL("DROP TABLE IF EXISTS Tests");
-        db.execSQL("DROP TABLE IF EXISTS Questions");
-        db.execSQL("DROP TABLE IF EXISTS Flashcards");
-        db.execSQL("DROP TABLE IF EXISTS Vocabulary");
-        db.execSQL("DROP TABLE IF EXISTS Topics");
-        db.execSQL("DROP TABLE IF EXISTS Users");
-
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS CauHoi");
+        db.execSQL("DROP TABLE IF EXISTS BaiTest");
+        db.execSQL("DROP TABLE IF EXISTS TheGhiNho");
+        db.execSQL("DROP TABLE IF EXISTS TuVung");
+        db.execSQL("DROP TABLE IF EXISTS ChuDe");
         onCreate(db);
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TOEIC Learning App"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"/>
+    <Button
+        android:id="@+id/btnTuVung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Học từ vựng"
+        android:layout_marginTop="15dp"
+        />
+    <Button
+        android:id="@+id/btnTuVung1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Học từ vựng ver 2"
+        android:layout_marginTop="15dp"
+        />
+
+
+    <Button
+        android:id="@+id/btnCauHoi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Câu hỏi"
+        android:layout_marginTop="15dp"/>
+
+
+</LinearLayout>

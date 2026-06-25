@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+
+    android:orientation="horizontal"
+
+    android:padding="10dp">
+
+
+
+    <!-- Ảnh từ vựng -->
+
+    <ImageView
+
+        android:id="@+id/imgTuVung"
+
+        android:layout_width="90dp"
+
+        android:layout_height="90dp"
+
+        android:scaleType="centerCrop"
+
+        android:src="@drawable/ic_launcher_background"/>
+
+
+
+    <!-- Nội dung -->
+
+    <LinearLayout
+
+        android:layout_width="0dp"
+
+        android:layout_height="wrap_content"
+
+        android:layout_weight="1"
+
+        android:orientation="vertical"
+
+        android:paddingLeft="10dp">
+
+
+
+        <TextView
+
+            android:id="@+id/txtTuAnh"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="employee"
+
+            android:textSize="18sp"
+
+            android:textStyle="bold"/>
+
+
+
+        <TextView
+
+            android:id="@+id/txtNghia"
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+
+            android:text="Nhân viên"
+
+            android:textSize="16sp"
+
+            android:paddingTop="5dp"/>
+
+
+    </LinearLayout>
+
+
+
+    <!-- Nút sửa -->
+
+    <Button
+
+        android:id="@+id/btnSua"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="Sửa"/>
+
+
+
+    <!-- Nút xóa -->
+
+    <Button
+
+        android:id="@+id/btnXoa"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="Xóa"/>
+
+
+
+</LinearLayout>

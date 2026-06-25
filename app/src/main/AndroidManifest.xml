@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -11,8 +14,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BaiTapLon_andori">
+        <activity android:name=".HomeActivity"/>
+        <activity android:name=".CauHoiActivity"/>
+        <activity android:name=".TuVungActivity"/>
+        <activity android:name=".ChuDeActivity"/>
+        <activity android:name=".ChuDeUserActivity"/>
+        <activity android:name=".ChiTietTuVungActivity"/>
+        <activity android:name=".QuestionUserActivity"/>
+        <activity android:name=".ChatActivity"/>
+        <activity android:name=".HomeUserActivity"/>
+<!--        <activity android:name=".ChuDeUser1" android:exported="false" />-->
+        <activity android:name=".ChuDeUser1"/>
+        <activity android:name=".DoAnActivity"/>
+        <activity android:name=".PhuongTienActivity"/>
+        <activity android:name=".ViecLamActivity"/>
+        <activity android:name=".TuVungDrawable"/>
         <activity
-            android:name=".TestActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#F5F5F5"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📚 CHỦ ĐỀ HỌC TOEIC"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#3F51B5"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mời bạn chọn chủ đề muốn học"
+        android:textSize="18sp"
+        android:textColor="#555555"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="40dp"/>
+
+
+    <Button
+        android:id="@+id/btnFood"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="🍔 Food"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#FF9800"/>
+
+    <Button
+        android:id="@+id/btnVehicle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="🚗 Vehicles"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#2196F3"/>
+
+    <Button
+        android:id="@+id/btnJob"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="👨‍⚕️ Jobs"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#9C27B0"/>
+
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="🏠 Quay lại Home"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#607D8B"/>
+
+</LinearLayout>

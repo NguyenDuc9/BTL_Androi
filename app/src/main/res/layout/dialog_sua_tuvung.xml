@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+
+    android:orientation="vertical"
+
+    android:padding="20dp">
+
+
+    <EditText
+
+        android:id="@+id/edtSuaTuAnh"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:hint="Từ tiếng Anh"/>
+
+
+
+    <EditText
+
+        android:id="@+id/edtSuaNghia"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:hint="Nghĩa tiếng Việt"/>
+
+
+
+    <Spinner
+
+        android:id="@+id/spSuaChuDe"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"/>
+
+
+
+    <ImageView
+
+        android:id="@+id/imgSua"
+
+        android:layout_width="120dp"
+
+        android:layout_height="120dp"
+
+        android:scaleType="centerCrop"/>
+
+
+
+    <Button
+
+        android:id="@+id/btnChonAnhSua"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="Chọn ảnh"/>
+
+
+
+    <Button
+
+        android:id="@+id/btnLuuSua"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:text="Lưu"/>
+
+
+
+</LinearLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <EditText
+
+        android:id="@+id/edtTuAnh"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:hint="Từ tiếng Anh"/>
+
+
+
+    <EditText
+
+        android:id="@+id/edtNghia"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:hint="Nghĩa tiếng Việt"/>
+
+
+
+    <Spinner
+
+        android:id="@+id/spinnerChuDe"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"/>
+
+
+
+    <Button
+
+        android:id="@+id/btnChonAnh"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="Chọn ảnh"/>
+    <ImageView
+
+        android:id="@+id/imgPreview"
+
+        android:layout_width="150dp"
+
+        android:layout_height="150dp"
+
+        android:layout_gravity="center"
+
+        android:scaleType="centerCrop"
+
+        android:src="@drawable/ic_launcher_background"/>
+
+
+
+    <Button
+
+        android:id="@+id/btnThem"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:text="Thêm"/>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/rvTuVung"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

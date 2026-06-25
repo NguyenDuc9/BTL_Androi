@@ -1,5 +1,6 @@
 package com.example.baitaplon_andori;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,28 +33,64 @@ public class MainActivity extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 1. Lấy dữ liệu từ EditText và xóa khoảng trắng thừa
                 String tk = Account.getText().toString().trim();
                 String mk = Password.getText().toString().trim();
 
-                // 2. Kiểm tra xem có trường nào bị trống không
                 if (tk.isEmpty() || mk.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Tài khoản và mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
-                }
-                // 3. Nếu người dùng đã nhập đầy đủ, tiến hành kiểm tra thông tin
-                else {
-                    // Ví dụ kiểm tra tài khoản mật khẩu cố định (Bạn có thể thay bằng logic của bạn hoặc gọi API)
-                    if (tk.equals("admin") && mk.equals("123456")) {
-                        Toast.makeText(MainActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
-                        // Code chuyển sang màn hình chính (HomeActivity) nếu cần:
-                        // Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                        // startActivity(intent);
-                        // finish(); // Đóng màn hình đăng nhập lại nếu không muốn người dùng quay lại bằng nút Back
-                    } else {
-                        // Thông báo nếu sai tài khoản hoặc mật khẩu
-                        Toast.makeText(MainActivity.this, "Tài khoản hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(
+                            MainActivity.this,
+                            "Tài khoản và mật khẩu không được để trống",
+                            Toast.LENGTH_SHORT
+                    ).show();
+
+                }
+                else if (tk.equals("admin")
+                        && mk.equals("123456")) {
+
+                    Toast.makeText(
+                            MainActivity.this,
+                            "Đăng nhập Admin thành công!",
+                            Toast.LENGTH_SHORT
+                    ).show();
+
+                    Intent intent =
+                            new Intent(
+                                    MainActivity.this,
+                                    HomeActivity.class
+                            );
+
+                    startActivity(intent);
+                    finish();
+
+                }
+                else if (tk.equals("user")
+                        && mk.equals("123456")) {
+
+                    Toast.makeText(
+                            MainActivity.this,
+                            "Đăng nhập User thành công!",
+                            Toast.LENGTH_SHORT
+                    ).show();
+
+                    Intent intent =
+                            new Intent(
+                                    MainActivity.this,
+                                    HomeUserActivity.class
+                            );
+
+                    startActivity(intent);
+                    finish();
+
+                }
+                else {
+
+                    Toast.makeText(
+                            MainActivity.this,
+                            "Tài khoản hoặc mật khẩu không chính xác",
+                            Toast.LENGTH_SHORT
+                    ).show();
+
                 }
             }
         });
